@@ -2,6 +2,10 @@
 
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
+let highScore = 0;
+const displayMessage = function (message) {
+  document.querySelector(".message").textContent = message;
+};
 
 console.log(secretNumber);
 
@@ -18,11 +22,16 @@ document.querySelector(".check").addEventListener("click", function () {
     document.querySelector("body").style.backgroundColor = "#60b347";
     document.querySelector(".number").style.width = "30rem";
 
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector(".highscore").textContent = highScore;
+    }
+
     // if user didn't win
   } else if (guess !== secretNumber) {
     if (score > 1) {
       document.querySelector(".message").textContent =
-        guess > secretNumber ? "Too hign" : "Too low";
+        guess > secretNumber ? "Too high" : "Too low";
       score--;
       document.querySelector(".score").textContent = score;
     } else {
